@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1050759094738",
+    "firebase_url": "https://entreprenuerclub-5af9f.firebaseio.com",
+    "project_id": "entreprenuerclub-5af9f",
+    "storage_bucket": "entreprenuerclub-5af9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050759094738:android:750309da3c7ed6f8",
+        "android_client_info": {
+          "package_name": "com.android.entrepreneurclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050759094738-gukto8eqp4e159q7rcdkm4rl7d9v56h9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.entrepreneurclub",
+            "certificate_hash": "8b30927424a3b662eb3e3e34553e32ae5268a723"
+          }
+        },
+        {
+          "client_id": "1050759094738-ej4nqurtd2h09289gavcauohh6iqs9ji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXGFdOjTrvqz3njXuaPD0PQBa7LlODdyc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050759094738-ej4nqurtd2h09289gavcauohh6iqs9ji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
