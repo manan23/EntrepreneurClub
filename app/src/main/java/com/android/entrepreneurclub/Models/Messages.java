@@ -1,5 +1,7 @@
 package com.android.entrepreneurclub.Models;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by AkshayeJH on 24/07/17.
  */
@@ -7,7 +9,7 @@ package com.android.entrepreneurclub.Models;
 public class Messages {
 
     private String message, type;
-    private long  time;
+    private Long  time;
     private boolean seen;
 
     private String from;
@@ -24,7 +26,7 @@ public class Messages {
         this.from = from;
     }
 
-    public Messages(String message, String type, long time, boolean seen) {
+    public Messages(String message, String type, Long time, boolean seen) {
         this.message = message;
         this.type = type;
         this.time = time;
@@ -47,11 +49,13 @@ public class Messages {
         this.type = type;
     }
 
-    public long getTime() {
-        return time;
+    public String getTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm");
+        String strTime = sdf.format(this.time);
+        return strTime;
     }
 
-    public void setTime(long time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

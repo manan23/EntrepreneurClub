@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.entrepreneurclub.Activity.ChatActivity;
+import com.android.entrepreneurclub.Activity.StartActivity;
 import com.android.entrepreneurclub.Models.Conv;
 import com.android.entrepreneurclub.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -41,7 +42,7 @@ public class ChatsFragment extends Fragment {
     private RecyclerView mConvList;
 
     private DatabaseReference mConvDatabase;
-    private DatabaseReference mMessageDatabase;
+    private DatabaseReference mMessageDatabase,mUserRef;
     private DatabaseReference mUsersDatabase;
     FirebaseRecyclerAdapter<Conv, ConvViewHolder> firebaseConvAdapter;
     private FirebaseAuth mAuth;
@@ -66,7 +67,7 @@ public class ChatsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
-
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mConvDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(mCurrent_user_id);
 
         mConvDatabase.keepSynced(true);
@@ -90,6 +91,7 @@ public class ChatsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
 
         Query query = mConvDatabase.orderByChild("timestamp");
         FirebaseRecyclerOptions<Conv> options =
@@ -190,13 +192,23 @@ public class ChatsFragment extends Fragment {
 
         mConvList.setAdapter(firebaseConvAdapter);
 
-firebaseConvAdapter.startListening();
+        firebaseConvAdapter.startListening();
     }
 
+
+
+
+    private void sendToStart() {
+
+        Intent startIntent = new Intent(getContext(), StartActivity.class);
+        startActivity(startIntent);
+
+    }
     @Override
     public void onStop() {
         super.onStop();
         firebaseConvAdapter.stopListening();
+
     }
 
 /*

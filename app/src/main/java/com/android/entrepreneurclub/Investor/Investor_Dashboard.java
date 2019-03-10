@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,7 +14,11 @@ import android.widget.TextView;
 
 import com.android.entrepreneurclub.Activity.ProfileActivity;
 import com.android.entrepreneurclub.Activity.StartActivity;
+import com.android.entrepreneurclub.Activity.UsersActivity;
 import com.android.entrepreneurclub.R;
+import com.android.entrepreneurclub.fragment.ChatsFragment;
+import com.android.entrepreneurclub.fragment.FriendsFragment;
+import com.android.entrepreneurclub.fragment.RequestsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,18 +35,20 @@ public class Investor_Dashboard extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager fm  = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    ft.replace(R.id.content_doc,new RequestsFragment()).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    ft.replace(R.id.content_doc,new ChatsFragment()).commit();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    ft.replace(R.id.content_doc,new FriendsFragment()).commit();
                     return true;
             }
-            return false;
+            return true;
         }
     };
 
@@ -91,7 +99,11 @@ public class Investor_Dashboard extends AppCompatActivity {
 
             FirebaseAuth.getInstance().signOut();
             sendToStart();
+        }
+        if(item.getItemId() == R.id.main_all_btn){
 
+            Intent settingsIntent = new Intent(Investor_Dashboard.this, UsersActivity.class);
+            startActivity(settingsIntent);
 
         }
         if(item.getItemId() ==R.id.profile) {

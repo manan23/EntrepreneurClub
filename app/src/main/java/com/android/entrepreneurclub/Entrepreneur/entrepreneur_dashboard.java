@@ -82,41 +82,28 @@ public class entrepreneur_dashboard extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
 
     }
+
+
+
+
+
+
+
     /*
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+       @Override
+        protected void onStop() {
+            super.onStop();
 
-        if(currentUser == null){
+            FirebaseUser currentUser = mAuth.getCurrentUser();
 
-            sendToStart();
+            if(currentUser != null) {
 
-        } else {
+                mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
-            mUserRef.child("online").setValue("true");
+            }
 
         }
-
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser != null) {
-
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
-
-        }
-
-    }
-
-*/
+        */
     private void sendToStart() {
 
         Intent startIntent = new Intent(entrepreneur_dashboard.this, StartActivity.class);

@@ -18,7 +18,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 public class StartActivity extends AppCompatActivity {
@@ -109,19 +108,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
 
-        FirebaseUser currentUser = auth.getCurrentUser();
-
-        if(currentUser != null) {
-
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
-
-        }
-
-    }
 
 
 

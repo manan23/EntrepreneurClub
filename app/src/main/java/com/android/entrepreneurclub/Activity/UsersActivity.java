@@ -17,6 +17,7 @@ import com.android.entrepreneurclub.Models.Users;
 import com.android.entrepreneurclub.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -27,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UsersActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private RecyclerView mUsersList;
     FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter;
     private DatabaseReference mUsersDatabase;
@@ -80,22 +81,25 @@ public class UsersActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position, @NonNull Users users) {
-                usersViewHolder.setDisplayName(users.getName());
-                usersViewHolder.setUserStatus(users.getStatus());
-                usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
-
                 final String user_id = getRef(position).getKey();
 
-                usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                      Intent profileIntent = new Intent(UsersActivity.this, OtherProfileActivity.class);
-                        profileIntent.putExtra("user_id", user_id);
-                        startActivity(profileIntent);
+                    usersViewHolder.setDisplayName(users.getName());
+                    usersViewHolder.setUserStatus(users.getStatus());
+                    usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
 
-                    }
-                });
+
+                    usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent profileIntent = new Intent(UsersActivity.this, OtherProfileActivity.class);
+                            profileIntent.putExtra("user_id", user_id);
+                            startActivity(profileIntent);
+
+                        }
+                    });
+
             }
 
         };
