@@ -29,7 +29,8 @@ public class OtherProfileActivity extends AppCompatActivity {
 
     private ImageView mProfileImage;
     private TextView mProfileName, mProfileStatus, mProfileFriendsCount;
-    private Button mProfileSendReqBtn, mDeclineBtn;
+    public static Button mProfileSendReqBtn;
+    public static Button mDeclineBtn;
 
     private DatabaseReference mUsersDatabase;
 

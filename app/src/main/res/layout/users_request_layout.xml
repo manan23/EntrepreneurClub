@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    android:paddingBottom="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_request_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/user_request_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_request_image"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/user_request_image"
+        android:text="Display Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/user_request_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_request_name"
+        android:layout_alignStart="@+id/user_request_name"
+        android:layout_marginTop="10dp"
+        android:text="User default Status" />
+
+    <ImageView
+        android:id="@+id/user_single_online_icon"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_request_name"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/user_request_name"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/online_icon" />
+
+    <ImageButton
+        android:id="@+id/check_req"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/user_request_name"
+        android:layout_marginTop="-39dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="35dp"
+        android:layout_toLeftOf="@id/cancel_req"
+        android:background="@drawable/ic_check_black_24dp"
+        android:text="Accept Request"
+        android:textColor="@color/md_white_1000" />
+
+    <ImageButton
+        android:id="@+id/cancel_req"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/user_request_name"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-39dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/ic_cancel_black_24dp"
+        android:text="Cancel Request"
+        android:textColor="@color/md_white_1000" />
+</RelativeLayout>
