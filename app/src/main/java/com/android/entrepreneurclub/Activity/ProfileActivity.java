@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +24,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText name, number, city, pgender, age, Companyname;
     TextView Gender;
     Button Update;
+    ImageView profileimage;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference;
     private Toolbar mToolbar;
@@ -45,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        profileimage=findViewById(R.id.profile_image);
         name = (EditText) findViewById(R.id.profilename);
         number = (EditText) findViewById(R.id.profilenumber);
         city = (EditText) findViewById(R.id.profilecity);
@@ -64,14 +69,28 @@ public class ProfileActivity extends AppCompatActivity {
        databaseReference.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               final String image=dataSnapshot.child("image").getValue().toString().trim();
                String Pname = dataSnapshot.child("name").getValue().toString().trim();
-               Log.d("Text from db",Pname);
                name.setText(Pname);
                pgender.setText(dataSnapshot.child("gender").getValue().toString().trim());
                number.setText(dataSnapshot.child("phone").getValue().toString().trim());
                Companyname.setText(dataSnapshot.child("company_name").getValue().toString().trim());
                age.setText(dataSnapshot.child("age").getValue().toString().trim());
                city.setText(dataSnapshot.child("locality").getValue().toString().trim());
+
+               Picasso.with(ProfileActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_avatar).into(profileimage, new Callback() {
+                   @Override
+                   public void onSuccess() {
+
+                   }
+
+                   @Override
+                   public void onError() {
+                       Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.default_avatar).into(profileimage);
+                   }
+               });
+
+
            }
 
            @Override
@@ -103,6 +122,17 @@ public class ProfileActivity extends AppCompatActivity {
                 Gender.setBackgroundColor(getResources().getColor(R.color.md_grey_300));
                 pgender.setBackgroundColor(getResources().getColor(R.color.md_grey_300));
                 pgender.setTextColor(Color.GRAY);
+
+                profileimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+
+
+
                 Update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

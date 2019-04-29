@@ -288,14 +288,17 @@ public class RequestsFragment extends Fragment {
 
 
                                                                 if (databaseError == null) {
-
-                                                                    OtherProfileActivity.mProfileSendReqBtn.setEnabled(true);
                                                                     mCurrent_state = "friends";
                                                                     OtherProfileActivity.mProfileSendReqBtn.setText("Unfriend this Person");
 
                                                                     OtherProfileActivity.mDeclineBtn.setVisibility(View.INVISIBLE);
                                                                     OtherProfileActivity.mDeclineBtn.setEnabled(false);
+                                                                    HashMap<String, String> notifDetails = new HashMap<>();
+                                                                    notifDetails.put("from", mCurrent_user_id);
 
+                                                                    notifDetails.put("type", "confirmed");
+
+                                                                    dbrefRoot.child("notifications").child(list_user_id).push().setValue(notifDetails);
                                                                 } else {
 
                                                                     String error = databaseError.getMessage();

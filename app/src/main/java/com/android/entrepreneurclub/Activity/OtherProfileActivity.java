@@ -295,7 +295,12 @@ public class OtherProfileActivity extends AppCompatActivity {
 
                                 mDeclineBtn.setVisibility(View.INVISIBLE);
                                 mDeclineBtn.setEnabled(false);
+                                HashMap<String, String> notifDetails = new HashMap<>();
+                                notifDetails.put("from", mCurrent_user.getUid());
 
+                                notifDetails.put("type", "confirmed");
+
+                                mNotificationDatabase.child(user_id).push().setValue(notifDetails);
                             } else {
 
                                 String error = databaseError.getMessage();
