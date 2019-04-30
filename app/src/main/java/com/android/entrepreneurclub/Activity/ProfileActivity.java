@@ -24,9 +24,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
                age.setText(dataSnapshot.child("age").getValue().toString().trim());
                city.setText(dataSnapshot.child("locality").getValue().toString().trim());
 
-               Picasso.with(ProfileActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_avatar).into(profileimage, new Callback() {
+            /*   Picasso.with(ProfileActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_avatar).into(profileimage, new Callback() {
                    @Override
                    public void onSuccess() {
 
@@ -88,8 +85,9 @@ public class ProfileActivity extends AppCompatActivity {
                    public void onError() {
                        Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.default_avatar).into(profileimage);
                    }
-               });
 
+               });
+ */
 
            }
 
