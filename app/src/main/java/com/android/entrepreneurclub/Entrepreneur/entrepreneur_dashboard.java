@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.android.entrepreneurclub.Activity.ProfileActivity;
-import com.android.entrepreneurclub.Activity.SettingsActivity;
 import com.android.entrepreneurclub.Activity.StartActivity;
 import com.android.entrepreneurclub.Activity.UsersActivity;
 import com.android.entrepreneurclub.Adapter.SectionsPagerAdapter;
@@ -130,14 +129,14 @@ public class entrepreneur_dashboard extends AppCompatActivity {
             finish();
 
         }
-
+/*
         if(item.getItemId() == R.id.main_settings_btn){
 
             Intent settingsIntent = new Intent(entrepreneur_dashboard.this, SettingsActivity.class);
             startActivity(settingsIntent);
 
         }
-
+*/
         if(item.getItemId() == R.id.main_all_btn){
 
             Intent settingsIntent = new Intent(entrepreneur_dashboard.this, UsersActivity.class);

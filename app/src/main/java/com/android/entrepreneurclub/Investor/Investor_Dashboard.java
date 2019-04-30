@@ -59,7 +59,6 @@ public class Investor_Dashboard extends AppCompatActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.investor_dashboard_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Entrepreneur Club");
         if (mAuth.getCurrentUser() != null) {
 

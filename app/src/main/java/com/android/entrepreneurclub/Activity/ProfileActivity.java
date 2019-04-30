@@ -121,12 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
                 pgender.setBackgroundColor(getResources().getColor(R.color.md_grey_300));
                 pgender.setTextColor(Color.GRAY);
 
-                profileimage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                    }
-                });
 
 
 

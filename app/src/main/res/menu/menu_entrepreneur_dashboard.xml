@@ -9,9 +9,6 @@
         android:orderInCategory="1"
         app:showAsAction="always" />
     <item
-        android:id="@+id/main_settings_btn"
-        android:title="Account Settings" />
-    <item
         android:id="@+id/main_all_btn"
         android:title="All Users" />
     <item
