@@ -36,6 +36,13 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference databaseReference;
     private Toolbar mToolbar;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.profile_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Profile");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         profileimage=findViewById(R.id.profile_image);
         name = (EditText) findViewById(R.id.profilename);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.entrepreneurclub">
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.android.entrepreneurclub">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -24,11 +24,15 @@
             android:name=".Entrepreneur.entrepreneur_dashboard"
             android:label="@string/title_activity_entrepreneur_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.LoginActivity"
+            android:parentActivityName=".Activity.StartActivity"/>
+        <activity android:name=".Activity.RegisterActivity"
+            android:parentActivityName=".Activity.StartActivity"/>
         <activity android:name=".Activity.SettingsActivity" />
-        <activity android:name=".Activity.OtherProfileActivity"/>
-        <activity android:name=".Activity.ProfileActivity"/>
+        <activity android:name=".Activity.OtherProfileActivity"
+            android:parentActivityName=".Activity.UsersActivity"/>
+        <activity android:name=".Activity.ProfileActivity"
+            android:parentActivityName=".Activity.StartActivity"/>
 
         <activity
             android:name=".Activity.StatusActivity"

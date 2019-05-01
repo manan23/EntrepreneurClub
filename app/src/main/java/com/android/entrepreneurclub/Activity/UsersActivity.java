@@ -29,8 +29,8 @@ public class UsersActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    private RecyclerView mUsersList;
-    FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter;
+    private RecyclerView mUsersList,minvestorList;
+    FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter,firebaseRecyclerAdapter1;
     private DatabaseReference mUsersDatabase;
 
     private LinearLayoutManager mLayoutManager;
@@ -50,68 +50,31 @@ public class UsersActivity extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
 
-        mUsersList = (RecyclerView) findViewById(R.id.users_list);
+        mUsersList = (RecyclerView) findViewById(R.id.entreprenuer_list);
         mUsersList.setHasFixedSize(true);
         mUsersList.setLayoutManager(mLayoutManager);
 
 
+        minvestorList = (RecyclerView) findViewById(R.id.investor_list);
+        minvestorList.setHasFixedSize(true);
+        minvestorList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        Query query = FirebaseDatabase.getInstance().getReference().child("Users");
-
-        FirebaseRecyclerOptions<Users> options =
-                new FirebaseRecyclerOptions.Builder<Users>()
-                        .setQuery(query, Users.class)
-                        .build();
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(options)
-
-
-         {
-            @NonNull
-            @Override
-            public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.users_single_layout, parent, false);
-                return new UsersViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position, @NonNull Users users) {
-                final String user_id = getRef(position).getKey();
-
-
-                    usersViewHolder.setDisplayName(users.getName());
-                    usersViewHolder.setUserStatus(users.getStatus());
-                    usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
-
-
-                    usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            Intent profileIntent = new Intent(UsersActivity.this, OtherProfileActivity.class);
-                            profileIntent.putExtra("user_id", user_id);
-                            startActivity(profileIntent);
-
-                        }
-                    });
-
-            }
-
-        };
-
-
-        mUsersList.setAdapter(firebaseRecyclerAdapter);
-        firebaseRecyclerAdapter.startListening();
+       user_entreprenuer();
+       user_investor();
+       firebaseRecyclerAdapter.startListening();
+        firebaseRecyclerAdapter1.startListening();
     }
     @Override
     public void onStop() {
         super.onStop();
         firebaseRecyclerAdapter.stopListening();
+        firebaseRecyclerAdapter1.startListening();
+
     }
 /*
             @Override
@@ -143,7 +106,106 @@ public class UsersActivity extends AppCompatActivity {
     }
 
 */
-    public static class UsersViewHolder extends RecyclerView.ViewHolder {
+
+
+public void user_entreprenuer()
+{
+    Query query = FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("type").equalTo("Entreprenuer");
+
+    FirebaseRecyclerOptions<Users> options =
+            new FirebaseRecyclerOptions.Builder<Users>()
+                    .setQuery(query, Users.class)
+                    .build();
+    firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(options)
+
+
+    {
+        @NonNull
+        @Override
+        public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.users_single_layout, parent, false);
+            return new UsersViewHolder(view);
+        }
+
+        @Override
+        protected void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position, @NonNull Users users) {
+            final String user_id = getRef(position).getKey();
+
+
+            usersViewHolder.setDisplayName(users.getName());
+            usersViewHolder.setUserStatus(users.getStatus());
+            usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
+
+
+            usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent profileIntent = new Intent(UsersActivity.this, OtherProfileActivity.class);
+                    profileIntent.putExtra("user_id", user_id);
+                    startActivity(profileIntent);
+
+                }
+            });
+
+        }
+
+    };
+
+
+    mUsersList.setAdapter(firebaseRecyclerAdapter);
+}
+public void user_investor()
+    {
+        Query query = FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("type").equalTo("Investor");
+
+        FirebaseRecyclerOptions<Users> options =
+                new FirebaseRecyclerOptions.Builder<Users>()
+                        .setQuery(query, Users.class)
+                        .build();
+        firebaseRecyclerAdapter1 = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(options)
+
+
+        {
+            @NonNull
+            @Override
+            public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.users_single_layout, parent, false);
+                return new UsersViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position, @NonNull Users users) {
+                final String user_id = getRef(position).getKey();
+
+
+                usersViewHolder.setDisplayName(users.getName());
+                usersViewHolder.setUserStatus(users.getStatus());
+                usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
+
+
+                usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent profileIntent = new Intent(UsersActivity.this, OtherProfileActivity.class);
+                        profileIntent.putExtra("user_id", user_id);
+                        startActivity(profileIntent);
+
+                    }
+                });
+
+            }
+
+        };
+
+
+        minvestorList.setAdapter(firebaseRecyclerAdapter1);
+    }
+
+public static class UsersViewHolder extends RecyclerView.ViewHolder {
 
         View mView;
 

@@ -18,7 +18,11 @@ public class RegisterActivity extends AppCompatActivity implements ActionBar.Tab
     private Toolbar mToolbar;
 
     private TabLayout tabLayout;
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -44,7 +44,11 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean cancel = false;
     View focusView = null;
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
