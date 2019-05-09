@@ -124,7 +124,7 @@ public void user_entreprenuer()
         @Override
         public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.users_single_layout, parent, false);
+                    .inflate(R.layout.users_entrepreneur_layout, parent, false);
             return new UsersViewHolder(view);
         }
 

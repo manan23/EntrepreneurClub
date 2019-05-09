@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.android.entrepreneurclub.Activity.ProfileActivity;
 import com.android.entrepreneurclub.Activity.StartActivity;
+import com.android.entrepreneurclub.Activity.UploadDetailsActivity;
 import com.android.entrepreneurclub.Activity.UsersActivity;
 import com.android.entrepreneurclub.Adapter.SectionsPagerAdapter;
 import com.android.entrepreneurclub.R;
@@ -146,6 +147,11 @@ public class entrepreneur_dashboard extends AppCompatActivity {
         if(item.getItemId() ==R.id.profile) {
 
             startActivity(new Intent(this, ProfileActivity.class));
+
+        }
+        if(item.getItemId() ==R.id.uploadDetailsBtn) {
+
+            startActivity(new Intent(this, UploadDetailsActivity.class));
 
         }
         return true;

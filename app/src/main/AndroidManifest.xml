@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.android.entrepreneurclub">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.entrepreneurclub">
 
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,36 +12,55 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.UploadMOUActivity"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.android.entrepreneurclub.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".Activity.UploadDetailsActivity" />
+
         <service android:name=".others.FirebaseNotificationsService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".Investor.Investor_Dashboard"
-            android:label="@string/title_activity_investor__dashboard"></activity>
+            android:label="@string/title_activity_investor__dashboard" />
         <activity
             android:name=".Entrepreneur.entrepreneur_dashboard"
             android:label="@string/title_activity_entrepreneur_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.LoginActivity"
-            android:parentActivityName=".Activity.StartActivity"/>
-        <activity android:name=".Activity.RegisterActivity"
-            android:parentActivityName=".Activity.StartActivity"/>
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:parentActivityName=".Activity.StartActivity" />
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:parentActivityName=".Activity.StartActivity" />
         <activity android:name=".Activity.SettingsActivity" />
-        <activity android:name=".Activity.OtherProfileActivity"
-            android:parentActivityName=".Activity.UsersActivity"/>
-        <activity android:name=".Activity.ProfileActivity"
-            android:parentActivityName=".Activity.StartActivity"/>
-
+        <activity
+            android:name=".Activity.OtherProfileActivity"
+            android:parentActivityName=".Activity.UsersActivity" />
+        <activity
+            android:name=".Activity.ProfileActivity"
+            android:parentActivityName=".Activity.StartActivity" />
         <activity
             android:name=".Activity.StatusActivity"
             android:parentActivityName=".Activity.SettingsActivity" />
         <activity
             android:name=".Activity.UsersActivity"
             android:parentActivityName=".Entrepreneur.entrepreneur_dashboard" />
-        <activity android:name=".Activity.ChatActivity"
-            android:parentActivityName=".Entrepreneur.entrepreneur_dashboard"></activity>
+        <activity
+            android:name=".Activity.ChatActivity"
+            android:parentActivityName=".Entrepreneur.entrepreneur_dashboard" />
         <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

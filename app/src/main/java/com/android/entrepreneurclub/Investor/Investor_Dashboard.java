@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.android.entrepreneurclub.Activity.ProfileActivity;
 import com.android.entrepreneurclub.Activity.StartActivity;
+import com.android.entrepreneurclub.Activity.UploadDetailsActivity;
 import com.android.entrepreneurclub.Activity.UsersActivity;
 import com.android.entrepreneurclub.R;
 import com.android.entrepreneurclub.fragment.ChatsFragment;
@@ -108,6 +109,11 @@ public class Investor_Dashboard extends AppCompatActivity {
         if(item.getItemId() ==R.id.profile) {
 
             startActivity(new Intent(this, ProfileActivity.class));
+
+        }
+        if(item.getItemId() ==R.id.uploadDetailsBtn) {
+
+            startActivity(new Intent(this, UploadDetailsActivity.class));
 
         }
      return true;
