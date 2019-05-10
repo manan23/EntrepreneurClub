@@ -28,8 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileActivity extends AppCompatActivity {
-    EditText name, number, city, pgender, age, Companyname, businessName;
+public class InvestorProfileActivity extends AppCompatActivity {
+    EditText name, number, city, pgender, age, Companyname, funding;
     TextView Gender;
     Button Update;
     ImageView profileimage;
@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_investor_profile);
 
         mToolbar = (Toolbar) findViewById(R.id.profile_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -62,27 +62,27 @@ public class ProfileActivity extends AppCompatActivity {
         Companyname = findViewById(R.id.profileCompanyname);
         Update = findViewById(R.id.Update);
         Gender = findViewById(R.id.Gender);
-        businessName = findViewById(R.id.profileBusinessCategory);
+        funding = findViewById(R.id.profileFunding);
 
 
         FirebaseUser user = auth.getCurrentUser();
         String uid = user.getUid();
 
-         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
 
-       databaseReference.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               final String image=dataSnapshot.child("image").getValue().toString().trim();
-               String Pname = dataSnapshot.child("name").getValue().toString().trim();
-               name.setText(Pname);
-               pgender.setText(dataSnapshot.child("gender").getValue().toString().trim());
-               number.setText(dataSnapshot.child("phone").getValue().toString().trim());
-               Companyname.setText(dataSnapshot.child("company_name").getValue().toString().trim());
-               businessName.setText(dataSnapshot.child("businessName").getValue().toString().trim());
-               age.setText(dataSnapshot.child("age").getValue().toString().trim());
-               city.setText(dataSnapshot.child("locality").getValue().toString().trim());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final String image=dataSnapshot.child("image").getValue().toString().trim();
+                String Pname = dataSnapshot.child("name").getValue().toString().trim();
+                name.setText(Pname);
+                pgender.setText(dataSnapshot.child("gender").getValue().toString().trim());
+                number.setText(dataSnapshot.child("phone").getValue().toString().trim());
+                Companyname.setText(dataSnapshot.child("company_name").getValue().toString().trim());
+                funding.setText(dataSnapshot.child("fundingAmount").getValue().toString().trim());
+                age.setText(dataSnapshot.child("age").getValue().toString().trim());
+                city.setText(dataSnapshot.child("locality").getValue().toString().trim());
 
 
             /*   Picasso.with(ProfileActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_avatar).into(profileimage, new Callback() {
@@ -99,13 +99,13 @@ public class ProfileActivity extends AppCompatActivity {
                });
  */
 
-           }
+            }
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-           }
-       });
+            }
+        });
 
     }
 
@@ -176,28 +176,28 @@ public class ProfileActivity extends AppCompatActivity {
                            }
                        });*/
 
-                      databaseReference.updateChildren(info).addOnCompleteListener(new OnCompleteListener() {
-                          @Override
-                          public void onComplete(@NonNull Task task) {
-                              if(task.isSuccessful()) {
-                                  Toast.makeText(ProfileActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                        databaseReference.updateChildren(info).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if(task.isSuccessful()) {
+                                    Toast.makeText(InvestorProfileActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
 
-                                  Update.setVisibility(View.GONE);
-                                  name.setEnabled(false);
-                                  name.setCursorVisible(false);
-                                  city.setEnabled(false);
-                                  number.setEnabled(false);
-                                  age.setEnabled(false);
-                                  Gender.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
-                                  pgender.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
-                                  pgender.setTextColor(Color.BLACK);
-                              }
-                              else
-                              {
-                                  Toast.makeText(ProfileActivity.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
-                              }
-                          }
-                      });
+                                    Update.setVisibility(View.GONE);
+                                    name.setEnabled(false);
+                                    name.setCursorVisible(false);
+                                    city.setEnabled(false);
+                                    number.setEnabled(false);
+                                    age.setEnabled(false);
+                                    Gender.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
+                                    pgender.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
+                                    pgender.setTextColor(Color.BLACK);
+                                }
+                                else
+                                {
+                                    Toast.makeText(InvestorProfileActivity.this, "Error Updating Profile", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
                 });
                 break;

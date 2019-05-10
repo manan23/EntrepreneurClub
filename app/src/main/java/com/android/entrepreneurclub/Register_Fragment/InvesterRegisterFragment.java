@@ -36,12 +36,13 @@ import java.util.regex.Pattern;
 
 public class InvesterRegisterFragment extends Fragment {
     @Nullable
-    TextInputEditText Investor_name, Investor_phone, Investor_email_register, Investor_age, Investor_Company, Investor_password, Investor_confirm_password, Investor_locality;
+    TextInputEditText Investor_name, Investor_phone, Investor_email_register, Investor_age, Investor_Company, Investor_password,
+            Investor_confirm_password, Investor_locality, investorFunding;
 
     Button Investor_Register;
     RadioGroup Investor_gender_buttons;
     RadioButton Investor_gender_male, Investor_gender_female;
-    private String email, name, password, confirmPassword, phone, gender, age, company_name, locality;
+    private String email, name, password, confirmPassword, phone, gender, age, company_name, locality, funding;
 
     private FirebaseUser user;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -61,6 +62,7 @@ public class InvesterRegisterFragment extends Fragment {
         Investor_password = v.findViewById(R.id.Investor_password);
         Investor_confirm_password = v.findViewById(R.id.Investor_confirm_password);
         Investor_locality = v.findViewById(R.id.Investor_Locality);
+        investorFunding = v.findViewById(R.id.investorFunding);
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         Investor_Register = v.findViewById(R.id.Investor_Register);
@@ -101,13 +103,14 @@ public class InvesterRegisterFragment extends Fragment {
                 age = Investor_age.getText().toString().trim();
                 company_name = Investor_Company.getText().toString().trim();
                 locality = Investor_locality.getText().toString().trim();
+                funding = investorFunding.getText().toString().trim();
 
 
                 if (validateDetails(name, email, password, confirmPassword, phone, age, company_name, locality)) {
                     if (Investor_gender_buttons.getCheckedRadioButtonId() < 0) {
                         Toast.makeText(getActivity(), "Please Select A Gender", Toast.LENGTH_SHORT).show();
                     } else {
-                        createAccount(name, email, password, phone, locality, age, gender, company_name);
+                        createAccount(name, email, password, phone, locality, age, gender, company_name, funding);
                     }
                 }
             }
@@ -196,7 +199,7 @@ public class InvesterRegisterFragment extends Fragment {
 
     public void createAccount(final String name, String email, String password,
                               final String phone, final String locality, final String age, final String gender,
-                              final String company_name) {
+                              final String company_name, final String funding) {
 
         final ProgressDialog loading = ProgressDialog.show(getActivity(), "Creating Account", "Please Wait...", false, true);
 
@@ -230,6 +233,7 @@ public class InvesterRegisterFragment extends Fragment {
                     userDetails.put("image", "default");
                     userDetails.put("thumb_image", "default");
                     userDetails.put("device_token", device_token);
+                    userDetails.put("fundingAmount", funding);
                     Log.d("test", "onComplete: ");
                     /*db.collection("Users").document(uid).set(userDetails).addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
                         @Override

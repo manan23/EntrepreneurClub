@@ -14,9 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.entrepreneurclub.Activity.LoginActivity;
@@ -40,11 +43,12 @@ public class EntreprenurerRegisterFragment extends Fragment {
     private Button Entreprenuer_register;
     private RadioGroup Entreprenuer_gender_button;
     private RadioButton Entreprenuer_gender_male, Entreprenuer_gender_female;
-    private String email, name, password, confirmPassword, phone, gender, age, company_name, locality;
+    private String email, name, password, confirmPassword, phone, gender, age, company_name, locality, content;
 
     private FirebaseUser user;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private DatabaseReference databaseReference;
+    private Spinner mContentSpinner;
 
     @Nullable
     @Override
@@ -56,7 +60,9 @@ public class EntreprenurerRegisterFragment extends Fragment {
         Entreprenuer_phone = v.findViewById(R.id.Entreprenuer_phone);
         Entreprenuer_Email_register = v.findViewById(R.id.Entreprenuer_email_register);
         Entreprenuer_age = v.findViewById(R.id.Entreprenuer_age);
-        Entreprenuer_Company = v.findViewById(R.id.Entreprenuer_Company);
+        Entreprenuer_Company = v.findViewById(R.id.Entreprenuer_company);
+        mContentSpinner =  v.findViewById(R.id.contentSpinner);
+        mContentSpinner = initSpinner(mContentSpinner, R.array.spinner_array);
         Entreprenuer_password = v.findViewById(R.id.Entreprenuer_password);
         Entreprenuer_confirm_password = v.findViewById(R.id.Entreprenuer_confirm_password);
         Entreprenuer_locality = v.findViewById(R.id.Entreprenuer_Locality);
@@ -66,6 +72,21 @@ public class EntreprenurerRegisterFragment extends Fragment {
         Entreprenuer_gender_male = v.findViewById(R.id.Entreprenuer_gender_male);
         Entreprenuer_gender_female = v.findViewById(R.id.Entreprenuer_gender_female);
         Entreprenuer_gender_button = v.findViewById(R.id.Entreprenuer_gender_buttons);
+
+        mContentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                content = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                content = parent.getSelectedItem().toString();
+
+            }
+        });
+
 
         Entreprenuer_gender_button.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -107,7 +128,7 @@ public class EntreprenurerRegisterFragment extends Fragment {
                     if (Entreprenuer_gender_button.getCheckedRadioButtonId() < 0) {
                         Toast.makeText(getActivity(), "Please Select A Gender", Toast.LENGTH_SHORT).show();
                     } else {
-                        createAccount(name, email, password, phone, locality, age, gender, company_name);
+                        createAccount(name, email, password, phone, locality, age, gender, company_name, content);
                     }
                 }
             }
@@ -216,10 +237,18 @@ public class EntreprenurerRegisterFragment extends Fragment {
         return check;
     }
 
+    public Spinner initSpinner(Spinner s, int content_array) {
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),content_array,R.layout.spinner_style);
+        adapter.setDropDownViewResource(R.layout.spinner_style);
+        s.setAdapter(adapter);
+        return s;
+    }
+
 
     public void createAccount(final String name, String email, String password,
                               final String phone, final String locality, final String age, final String gender,
-                              final String company_name) {
+                              final String company_name, final String content) {
 
         final ProgressDialog loading = ProgressDialog.show(getActivity(), "Creating Account", "Please Wait...", false, false);
 
@@ -252,6 +281,7 @@ public class EntreprenurerRegisterFragment extends Fragment {
                     userDetails.put("image", "default");
                     userDetails.put("thumb_image", "default");
                     userDetails.put("device_token", device_token);
+                    userDetails.put("businessName", content);
 
 
                     databaseReference.setValue(userDetails).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_array">
+        <item>Food</item>
+        <item>Grocery</item>
+        <item>Clothing</item>
+        <item>Vegetables</item>
+        <item>Electronics</item>
+        <item>Tours and Travels</item>
+        <item>Import export</item>
+        <item>Stationary</item>
+        <item>Hardware</item>
+        <item>Furniture</item>
+        <item>Real state</item>
+
+    </string-array>
+</resources>

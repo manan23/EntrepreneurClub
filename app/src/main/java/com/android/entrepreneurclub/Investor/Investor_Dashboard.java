@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.android.entrepreneurclub.Activity.ProfileActivity;
+import com.android.entrepreneurclub.Activity.InvestorProfileActivity;
 import com.android.entrepreneurclub.Activity.StartActivity;
 import com.android.entrepreneurclub.Activity.UploadDetailsActivity;
 import com.android.entrepreneurclub.Activity.UsersActivity;
@@ -108,7 +108,7 @@ public class Investor_Dashboard extends AppCompatActivity {
         }
         if(item.getItemId() ==R.id.profile) {
 
-            startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this, InvestorProfileActivity.class));
 
         }
         if(item.getItemId() ==R.id.uploadDetailsBtn) {
